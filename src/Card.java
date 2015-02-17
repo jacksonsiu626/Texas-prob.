@@ -1,9 +1,9 @@
 
-public class YourCard {
+public class Card {
 	private String [] cardNum;
 	private String [] cardSuit;
 	
-	public YourCard(String cardNum1, String cardSuit1, String cardNum2, String cardSuit2) {
+	public Card(String cardNum1, String cardSuit1, String cardNum2, String cardSuit2) {
 		cardNum[0] = cardNum1;
 		cardNum[1] = cardNum2;
 		cardSuit[0] = cardSuit1;

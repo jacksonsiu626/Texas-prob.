@@ -1,12 +1,26 @@
+import java.util.Scanner;
+
 
 public class Main {
-	public static String [] cardNum = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
-	public static String [] cardSuit = {"spade","heart","diamond","club"};
-	public static int numOfCase = 2000000;
+	public static String [] cardNum = {"2","3","4","5","6","7","8","9","10","J","Q","K","A"};
+	public static String [] cardSuit = {"diamond","club","heart","spade"};
+	public static int numOfCase = 1;
 	
 	public static void main(String args[] ){
 		//YourCard yourCard = new YourCard("A","spade","K","spade");
 		String [][] card = new String[52][2];
+		System.out.println("Num Of player(not include yourself): ");
+		Scanner read = new Scanner(System.in);
+		String str = read.nextLine();
+		int numOfPlayer;
+		do{
+			System.out.println("Num Of player(not include yourself): ");
+			str = read.nextLine();
+			numOfPlayer = Integer.parseInt(str);
+		}while(numOfPlayer<=0 || numOfPlayer>=9 );
+		
+		Dealer dealer = new Dealer(numOfPlayer);
+
 		
 		int count=0;
 		for(int i=0 ; i<13 ; i++){
@@ -17,13 +31,14 @@ public class Main {
 			}
 		}
 		int numOfCard = 5;
+		/*
 		testThreeSuit(numOfCard);
 		testFourSuit(numOfCard);
-		test56Straight(numOfCard); //自己的卡有蛇，面卡有加埋你有蛇
-		test57Straight(numOfCard);
+		test56Straight(numOfCard);
 		//test57StraightWithSix();
 		test58Straight(numOfCard);
 		test59Straight(numOfCard);
+		*/
 	}
 	
 	public static void testThreeSuit(int numOfCard){
