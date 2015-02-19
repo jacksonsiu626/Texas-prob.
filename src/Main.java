@@ -9,15 +9,16 @@ public class Main {
 	public static void main(String args[] ){
 		//YourCard yourCard = new YourCard("A","spade","K","spade");
 		String [][] card = new String[52][2];
-		System.out.println("Num Of player(not include yourself): ");
+
 		Scanner read = new Scanner(System.in);
-		String str = read.nextLine();
-		int numOfPlayer;
-		do{
+		String str;
+		int numOfPlayer=0;
+		
+		while(numOfPlayer<=0 || numOfPlayer>=9 ){
 			System.out.println("Num Of player(not include yourself): ");
 			str = read.nextLine();
 			numOfPlayer = Integer.parseInt(str);
-		}while(numOfPlayer<=0 || numOfPlayer>=9 );
+		}
 		
 		Dealer dealer = new Dealer(numOfPlayer);
 
