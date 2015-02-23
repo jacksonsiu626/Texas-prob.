@@ -28,22 +28,6 @@ public class Card {
 		cardUsed[i][j] = 1;
 	}
 
-	public static String[] getCardNumVar() {
-		return cardNumVar;
-	}
-
-	public static void setCardNumVar(String[] cardNumVar) {
-		Card.cardNumVar = cardNumVar;
-	}
-
-	public static String[] getCardSuitVar() {
-		return cardSuitVar;
-	}
-
-	public static void setCardSuitVar(String[] cardSuitVar) {
-		Card.cardSuitVar = cardSuitVar;
-	}
-
 	public static int[][] getCardUsed() {
 		return cardUsed;
 	}

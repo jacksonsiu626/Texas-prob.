@@ -1,14 +1,15 @@
 public class Sort {
      
-    private static int[] array;
-    private static int[] tempMergArr;
+    private static Card[] array;
+    private static Card[] tempMergArr;
     private static int length;
      
-    public static void sort(int inputArr[]) {
-        array = inputArr;
-        length = inputArr.length;
-        tempMergArr = new int[length];
+    public static Card [] sort(Card [] playerComb) {
+        array = playerComb;
+        length = playerComb.length;
+        tempMergArr = new Card[length];
         doMergeSort(0, length - 1);
+        return array;
     }
  
     private static void doMergeSort(int lowerIndex, int higherIndex) {
@@ -33,9 +34,17 @@ public class Sort {
         int j = middle + 1;
         int k = lowerIndex;
         while (i <= middle && j <= higherIndex) {
-            if (tempMergArr[i] <= tempMergArr[j]) {
+            if (tempMergArr[i].getCardNum() < tempMergArr[j].getCardNum()) {
                 array[k] = tempMergArr[i];
                 i++;
+            }else if(tempMergArr[i].getCardNum() == tempMergArr[j].getCardNum()) {
+            	if(tempMergArr[i].getCardSuit() < tempMergArr[j].getCardSuit()) {
+	                array[k] = tempMergArr[i];
+	                i++;
+            	}else{
+                    array[k] = tempMergArr[j];
+                    j++;
+            	}
             } else {
                 array[k] = tempMergArr[j];
                 j++;
