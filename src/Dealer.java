@@ -72,7 +72,28 @@ public class Dealer {
 	}
 	
 	public int [] checkFourKind(Card [] playerCards){
-		
+		int i;
+		int [] temp = new int[3];
+		boolean isFourKind=false;
+		for(i=0 ; i<4 ; i++){
+			if( playerCards[i].getCardNum() == playerCards[i+1].getCardNum() 
+			 && playerCards[i+1].getCardNum() == playerCards[i+2].getCardNum()
+			 && playerCards[i+2].getCardNum() == playerCards[i+3].getCardNum()){
+				isFourKind=true;
+				break;
+			}
+		}
+		if(isFourKind){
+			temp[0] = 7;
+			temp[1] = playerCards[i].getCardNum();
+			if(i==3)
+				temp[2] = playerCards[2].getCardNum();
+			else
+				temp[2] = playerCards[6].getCardNum();
+			return temp;
+		}else
+			return checkFullHouse(playerCards);
+			
 	}
 	
 	public int [] checkFullHouse(Card [] playerCards){
