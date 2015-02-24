@@ -5,7 +5,7 @@ public class Dealer {
 	private static Card [][] cardArr;
 	private static Card [] communityCards;
 	private static int [] playCards;
-	private static boolean playerWin;
+	public static boolean playerWin;
 	
 	public Dealer(int numOfPlayer){
 		playerWin=true;
@@ -62,30 +62,20 @@ public class Dealer {
 				}
 			}
 		}
-		if(playerWin)
-			System.out.print("You Win");
-		else
-			System.out.print("You lose");
 	}
 	
 	public void dealCard(){
 		communityCards = new Card [5];
-		cardArr[0][0] = new Card(3,2);
-		cardArr[0][1] = new Card(5,2);
+		cardArr[0][0] = new Card(12,2);
+		cardArr[0][1] = new Card(11,2);
 		for(int i=1 ; i<numOfPlayer+1 ; i++){
 			cardArr[i][0] = new Card();
 			cardArr[i][1] = new Card();
 		}
-/*
 		for(int i=0 ; i<5 ; i++){
 			communityCards[i] = new Card();
-		}*/
-		communityCards[0] = new Card(1,2);
-		communityCards[1] = new Card(2,2);
-		communityCards[2] = new Card(3,0);
-		communityCards[3] = new Card(4,2);
-		communityCards[4] = new Card(5,0);
-		cardTranslate();
+		}
+		//cardTranslate();
 	}
 
 	public void cardTranslate(){
@@ -108,8 +98,8 @@ public class Dealer {
 			cardComb[i] = communityCards[i-2];
 		}
 		playerCards = Sort.sort(cardComb);
-			for(int j=0 ; j<playerCards.length ; j++)
-				System.out.print(Card.cardNumVar[playerCards[j].getCardNum()]+"-"+Card.cardSuitVar[playerCards[j].getCardSuit()]+" / ") ;
+		//	for(int j=0 ; j<playerCards.length ; j++)
+		//		System.out.print(Card.cardNumVar[playerCards[j].getCardNum()]+"-"+Card.cardSuitVar[playerCards[j].getCardSuit()]+" / ") ;
 		
 		int [] check;
 		if( (check=checkStraightFlush(cardComb)) != null){
@@ -122,7 +112,7 @@ public class Dealer {
 		}else if( (check=checkPair(6,cardComb)) != null){
 		}else if( (check=checkHighCard(cardComb)) != null){
 		}
-		System.out.println(" :: "+combination[check[0]]) ;
+		//System.out.println(" :: "+combination[check[0]]) ;
 		return check;
 	}
 
