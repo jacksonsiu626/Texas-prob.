@@ -19,8 +19,11 @@ public class Main {
 			str = read.nextLine();
 			numOfPlayer = Integer.parseInt(str);
 		}
-		
-		Dealer dealer = new Dealer(numOfPlayer);
+
+		 //long begintime = System.currentTimeMillis();
+		//for(int i=0 ; i<200000 ; i++){
+			Dealer dealer = new Dealer(numOfPlayer);
+		//}
 
 		
 		int count=0;
@@ -31,6 +34,11 @@ public class Main {
 				count++;
 			}
 		}
+
+		 // long endtime=System.currentTimeMillis();
+
+		  //long costTime = (endtime - begintime);
+			//System.out.print(costTime);
 		int numOfCard = 5;
 		/*
 		testThreeSuit(numOfCard);

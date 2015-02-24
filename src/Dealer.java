@@ -4,38 +4,69 @@ public class Dealer {
 	private static  int numOfPlayer;
 	private static Card [][] cardArr;
 	private static Card [] communityCards;
-	private static int [][] playerComp;
+	private static int [] playCards;
+	private static boolean playerWin=true;
 	
 	public Dealer(int numOfPlayer){
 		this.numOfPlayer = numOfPlayer;
-		playerComp = new int [numOfPlayer+1][5];
 		cardArr = new Card[numOfPlayer+1][2];
 		dealCard();
-		for(int i=0; i<numOfPlayer+1; i++)
-			checkCardType(cardArr[i]);
+		playCards = checkCardType(cardArr[0]);
+		for(int i=1; i<numOfPlayer+1; i++){
+			int [] temp = checkCardType(cardArr[i]);
+			if( playCards[0] < temp[0] ){
+				playerWin=false;
+			}else if(playCards[0] == temp[0]){
+				if(playCards[0]==0){
+					for(int j=1 ; j<playCards.length ; j++){
+						if(temp[j] > playCards[j])
+							playerWin=false;
+					}
+				}else if(playCards[0]==1){
+					
+				}else if(playCards[0]==2){
+					
+				}else if(playCards[0]==3){
+					
+				}else if(playCards[0]==4){
+					
+				}else if(playCards[0]==5){
+					
+				}else if(playCards[0]==6){
+					
+				}else if(playCards[0]==7){
+					
+				}else if(playCards[0]==8){
+					
+				}
+			}
+		}
+		if(playerWin)
+			System.out.print("You Win");
+		else
+			System.out.print("You lose");
 	}
 	
-	public Card [][] dealCard(){
+	public void dealCard(){
 		communityCards = new Card [5];
 		cardArr[0][0] = new Card(12,1);
-		cardArr[0][1] = new Card(12,2);
+		cardArr[0][1] = new Card(11,1);
 		for(int i=1 ; i<numOfPlayer+1 ; i++){
 			cardArr[i][0] = new Card();
 			cardArr[i][1] = new Card();
 		}
+
 		/*
 		for(int i=0 ; i<5 ; i++){
 			communityCards[i] = new Card();
 		}*/
-		communityCards[0] = new Card(1,1);
-		communityCards[1] = new Card(2,1);
-		communityCards[2] = new Card(3,1);
-		communityCards[3] = new Card(4,1);
+		communityCards[0] = new Card(0,1);
+		communityCards[1] = new Card(1,0);
+		communityCards[2] = new Card(6,1);
+		communityCards[3] = new Card(9,0);
 		communityCards[4] = new Card(5,1);
 		
 		cardTranslate();
-
-		return cardArr;
 	}
 
 	public void cardTranslate(){
@@ -146,22 +177,27 @@ public class Dealer {
 	
 	public int [] checkFlush(Card [] playerCards){ //[type][biggest card][2nd card][3rd card][4th card][5th card]
 		int [] temp = new int[6];
-		
-		for(int i=6 ; i>=4 ; i--){
-			if(playerCards[i].getCardSuit() == playerCards[i-1].getCardSuit()
-			&& playerCards[i-1].getCardSuit() == playerCards[i-2].getCardSuit()
-			&& playerCards[i-2].getCardSuit() == playerCards[i-3].getCardSuit()
-			&& playerCards[i-3].getCardSuit() == playerCards[i-4].getCardSuit()
-			){
-				temp[0] = 5;
-				temp[1] = playerCards[i].getCardNum();
-				temp[2] = playerCards[i-1].getCardNum();
-				temp[3] = playerCards[i-2].getCardNum();
-				temp[4] = playerCards[i-3].getCardNum();
-				temp[5] = playerCards[i-4].getCardNum();
+		int [] suit = new int[4];
+		int flush=-1;
+		for(int i=0 ; i<7 ; i++){
+			suit[playerCards[i].getCardSuit()]++;
+			if(suit[playerCards[i].getCardSuit()] >=5 ){
+				flush=playerCards[i].getCardSuit();
+				temp[0]=5;
 				break;
 			}
 		}
+		if(flush == -1)
+			return null;
+		int count=1;
+		for(int i=6 ; i>=0 ; i--){
+			if( playerCards[i].getCardSuit() == flush ){
+				temp[count++]=playerCards[i].getCardNum();
+				if(count == 6)
+					break;
+			}
+		}
+		
 		if(temp[0] != 5)
 			return null;
 		else
@@ -172,25 +208,27 @@ public class Dealer {
 		int [] temp = new int[2];
 		int [] trim = new int[7];
 		int count=0;
-		for(int i=0 ; i<6 ; i++){
-			if(playerCards[i].getCardNum() == playerCards[i+1].getCardNum())
+		for(int i=0 ; i<7 ; i++){
+			if(i < 6 && (playerCards[i].getCardNum() == playerCards[i+1].getCardNum()))
 				continue;
 			else
 				trim[count++] = playerCards[i].getCardNum();
 		}
 		
+		if( ((trim[3] == 3) && (trim[2] == 2) && (trim[1] == 1) && (trim[0] == 0) && (trim[count-1] == 12)) ){ //A2345
+			temp[0] = 4;
+			temp[1] = 3;
+		}
+			
 		for(int i=count-1 ; i>=4 ; i--){
-			if((trim[i] == trim[i-1]-1)
-			&& (trim[i-1] == trim[i-2]-1)
-			&& (trim[i-2] == trim[i-3]-1)
-			&& (trim[i-3] == trim[i-4]-1)
+			if( ((trim[i] == trim[i-1]+1) && (trim[i-1] == trim[i-2]+1) && (trim[i-2] == trim[i-3]+1) && (trim[i-3] == trim[i-4]+1))
 			){
 				temp[0] = 4;
 				temp[1] = playerCards[i].getCardNum();
 				break;
 			}
 		}
-		System.out.print("["+trim[5]+"]");;
+		
 		if(temp[0] != 4)
 			return null;
 		else
