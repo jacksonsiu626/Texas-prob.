@@ -1,7 +1,7 @@
 
 public class Card {
 	public static String [] cardNumVar = {"2","3","4","5","6","7","8","9","10","J","Q","K","A"};
-	public static String [] cardSuitVar = {"♦","♣","♥","♠"};
+	public static String [] cardSuitVar = {"d","c","h","s"};
 	public static int [][] cardUsed = new int[52][4];
 	
 	private int cardNum;

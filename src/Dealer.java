@@ -23,9 +23,16 @@ public class Dealer {
 			cardArr[i][0] = new Card();
 			cardArr[i][1] = new Card();
 		}
+		/*
 		for(int i=0 ; i<5 ; i++){
 			communityCards[i] = new Card();
-		}
+		}*/
+		communityCards[0] = new Card(1,1);
+		communityCards[1] = new Card(2,1);
+		communityCards[2] = new Card(3,1);
+		communityCards[3] = new Card(4,1);
+		communityCards[4] = new Card(5,1);
+		
 		cardTranslate();
 
 		return cardArr;
@@ -52,7 +59,7 @@ public class Dealer {
 		}
 		playerCards = Sort.sort(cardComb);
 			for(int j=0 ; j<playerCards.length ; j++)
-				System.out.print(Card.cardNumVar[playerCards[j].getCardNum()]+Card.cardSuitVar[playerCards[j].getCardSuit()]+" / ") ;
+				System.out.print(Card.cardNumVar[playerCards[j].getCardNum()]+"-"+Card.cardSuitVar[playerCards[j].getCardSuit()]+" / ") ;
 		
 		int [] check;
 		if( (check=checkStraightFlush(cardComb)) != null){
@@ -163,17 +170,27 @@ public class Dealer {
 
 	public int [] checkStraight(Card [] playerCards){ //[type][largest card]
 		int [] temp = new int[2];
-		for(int i=6 ; i>=4 ; i--){
-			if(playerCards[i].getCardNum() == playerCards[i-1].getCardNum()-1
-			&& playerCards[i-1].getCardNum() == playerCards[i-2].getCardNum()-1
-			&& playerCards[i-2].getCardNum() == playerCards[i-3].getCardNum()-1
-			&& playerCards[i-3].getCardNum() == playerCards[i-4].getCardNum()-1
+		int [] trim = new int[7];
+		int count=0;
+		for(int i=0 ; i<6 ; i++){
+			if(playerCards[i].getCardNum() == playerCards[i+1].getCardNum())
+				continue;
+			else
+				trim[count++] = playerCards[i].getCardNum();
+		}
+		
+		for(int i=count-1 ; i>=4 ; i--){
+			if((trim[i] == trim[i-1]-1)
+			&& (trim[i-1] == trim[i-2]-1)
+			&& (trim[i-2] == trim[i-3]-1)
+			&& (trim[i-3] == trim[i-4]-1)
 			){
 				temp[0] = 4;
 				temp[1] = playerCards[i].getCardNum();
 				break;
 			}
 		}
+		System.out.print("["+trim[5]+"]");;
 		if(temp[0] != 4)
 			return null;
 		else
