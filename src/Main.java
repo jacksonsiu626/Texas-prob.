@@ -21,9 +21,9 @@ public class Main {
 		}
 
 		 //long begintime = System.currentTimeMillis();
-		//for(int i=0 ; i<200000 ; i++){
+		for(int i=0 ; i<10 ; i++){
 			Dealer dealer = new Dealer(numOfPlayer);
-		//}
+		}
 
 		
 		int count=0;

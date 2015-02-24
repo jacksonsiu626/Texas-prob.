@@ -5,9 +5,10 @@ public class Dealer {
 	private static Card [][] cardArr;
 	private static Card [] communityCards;
 	private static int [] playCards;
-	private static boolean playerWin=true;
+	private static boolean playerWin;
 	
 	public Dealer(int numOfPlayer){
+		playerWin=true;
 		this.numOfPlayer = numOfPlayer;
 		cardArr = new Card[numOfPlayer+1][2];
 		dealCard();
@@ -23,21 +24,41 @@ public class Dealer {
 							playerWin=false;
 					}
 				}else if(playCards[0]==1){
-					
+					if(temp[2] > playCards[2])
+						playerWin=false;
 				}else if(playCards[0]==2){
-					
+					for(int j=1 ; j<playCards.length ; j++){
+						if(temp[j] > playCards[j])
+							playerWin=false;
+					}
 				}else if(playCards[0]==3){
-					
+					for(int j=1 ; j<playCards.length ; j++){
+						if(temp[j] > playCards[j])
+							playerWin=false;
+					}
 				}else if(playCards[0]==4){
-					
+						if(temp[1] > playCards[1])
+							playerWin=false;
 				}else if(playCards[0]==5){
-					
+					for(int j=1 ; j<playCards.length ; j++){
+						if(temp[j] > playCards[j])
+							playerWin=false;
+					}
 				}else if(playCards[0]==6){
-					
+					for(int j=1 ; j<playCards.length ; j++){
+						if(temp[j] > playCards[j])
+							playerWin=false;
+					}
 				}else if(playCards[0]==7){
-					
+					for(int j=1 ; j<playCards.length ; j++){
+						if(temp[j] > playCards[j])
+							playerWin=false;
+					}
 				}else if(playCards[0]==8){
-					
+					for(int j=1 ; j<playCards.length ; j++){
+						if(temp[j] > playCards[j])
+							playerWin=false;
+					}
 				}
 			}
 		}
@@ -49,23 +70,21 @@ public class Dealer {
 	
 	public void dealCard(){
 		communityCards = new Card [5];
-		cardArr[0][0] = new Card(12,1);
-		cardArr[0][1] = new Card(11,1);
+		cardArr[0][0] = new Card(3,2);
+		cardArr[0][1] = new Card(5,2);
 		for(int i=1 ; i<numOfPlayer+1 ; i++){
 			cardArr[i][0] = new Card();
 			cardArr[i][1] = new Card();
 		}
-
-		/*
+/*
 		for(int i=0 ; i<5 ; i++){
 			communityCards[i] = new Card();
 		}*/
-		communityCards[0] = new Card(0,1);
-		communityCards[1] = new Card(1,0);
-		communityCards[2] = new Card(6,1);
-		communityCards[3] = new Card(9,0);
-		communityCards[4] = new Card(5,1);
-		
+		communityCards[0] = new Card(1,2);
+		communityCards[1] = new Card(2,2);
+		communityCards[2] = new Card(3,0);
+		communityCards[3] = new Card(4,2);
+		communityCards[4] = new Card(5,0);
 		cardTranslate();
 	}
 
@@ -107,21 +126,26 @@ public class Dealer {
 		return check;
 	}
 
-	public int [] checkStraightFlush(Card [] playerCard){ //[type][biggest number][flush]
+	public int [] checkStraightFlush(Card [] playerCard){ //[type][biggest number]
 		int [] tempFlush = checkFlush(playerCard);
 		int [] tempStraight = checkStraight(playerCard);
+		
 		if( tempFlush != null && tempStraight != null ){
-			int [] temp = new int [2];
-			temp[0] = 8;
-			temp[1] = tempStraight[1];
-			return temp;
-		}else if(tempStraight != null){
+			if((tempFlush[1] == tempFlush[2]+1) && (tempFlush[2] == tempFlush[3]+1) 
+			&& (tempFlush[3] == tempFlush[4]+1) && (tempFlush[4] == tempFlush[5]+1)){
+				int [] temp = new int [2];
+				temp[0] = 8;
+				temp[1] = tempStraight[1];
+				return temp;
+			}
+		}
+		if(tempStraight != null && tempFlush ==null){ 
 			return tempStraight;
 		}else
 			return null;
 	}
 	
-	public int [] checkFourKind(Card [] playerCards){
+	public int [] checkFourKind(Card [] playerCards){ //type,fourkind,largest
 		int i;
 		int [] temp = new int[3];
 		boolean isFourKind=false;
@@ -235,7 +259,7 @@ public class Dealer {
 			return temp;
 	}
 	
-	public int [] checkThreeKind(Card [] playerCards){ //type,three kind largest card, 2nd largest card
+	public int [] checkThreeKind(Card [] playerCards){ //type,three kind, largest card, 2nd largest card
 		int [] temp = new int[4];
 		for(int i=6 ; i>=2 ; i--){
 			if(playerCards[i].getCardNum() == playerCards[i-1].getCardNum()
