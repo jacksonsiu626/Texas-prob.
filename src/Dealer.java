@@ -52,9 +52,20 @@ public class Dealer {
 		playerCards = Sort.sort(cardComb);
 			for(int j=0 ; j<playerCards.length ; j++)
 				System.out.print(Card.cardNumVar[playerCards[j].getCardNum()]+Card.cardSuitVar[playerCards[j].getCardSuit()]+" / ") ;
-			System.out.print("\n") ;
-
-		return checkStraightFlush(cardComb);
+		
+		int [] check;
+		if( (check=checkStraightFlush(cardComb)) != null){
+		}else if( (check=checkFourKind(cardComb)) != null){
+		}else if( (check=checkFullHouse(cardComb)) != null){
+		}else if( (check=checkFlush(cardComb)) != null){
+		}else if( (check=checkStraight(cardComb)) != null){
+		}else if( (check=checkThreeKind(cardComb)) != null){
+		}else if( (check=checkTwoPair(cardComb)) != null){
+		}else if( (check=checkPair(6,cardComb)) != null){
+		}else if( (check=checkHighCard(cardComb)) != null){
+		}
+		System.out.println(" :: "+check[0]) ;
+		return check;
 	}
 
 	public int [] checkStraightFlush(Card [] playerCard){ //[type][biggest number][flush]
@@ -202,6 +213,8 @@ public class Dealer {
 		int [] pair2;
 
 		pair1 = checkPair(6,playerCards);
+		if(pair1 == null)
+			return null;
 		pair2 = checkPair(pair1[1]-1,playerCards);
 		
 		if(pair2 == null)
