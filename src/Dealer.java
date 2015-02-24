@@ -1,5 +1,6 @@
 
 public class Dealer {
+	public static String [] combination = {"High Card","Pair","Two Pair","Three Kind","Straight","Flush","Full House","Four Kind","Straight Flush"};
 	private static  int numOfPlayer;
 	private static Card [][] cardArr;
 	private static Card [] communityCards;
@@ -16,8 +17,8 @@ public class Dealer {
 	
 	public Card [][] dealCard(){
 		communityCards = new Card [5];
-		cardArr[0][0] = new Card("A","diamond");
-		cardArr[0][1] = new Card("A","club");
+		cardArr[0][0] = new Card(12,1);
+		cardArr[0][1] = new Card(12,2);
 		for(int i=1 ; i<numOfPlayer+1 ; i++){
 			cardArr[i][0] = new Card();
 			cardArr[i][1] = new Card();
@@ -64,7 +65,7 @@ public class Dealer {
 		}else if( (check=checkPair(6,cardComb)) != null){
 		}else if( (check=checkHighCard(cardComb)) != null){
 		}
-		System.out.println(" :: "+check[0]) ;
+		System.out.println(" :: "+combination[check[0]]) ;
 		return check;
 	}
 
@@ -184,7 +185,6 @@ public class Dealer {
 		for(int i=6 ; i>=2 ; i--){
 			if(playerCards[i].getCardNum() == playerCards[i-1].getCardNum()
 			&& playerCards[i-1].getCardNum() == playerCards[i-2].getCardNum()
-			&& playerCards[i-2].getCardNum() == playerCards[i-3].getCardNum()
 			){
 				temp[0] = 3;
 				temp[1] = playerCards[i].getCardNum();

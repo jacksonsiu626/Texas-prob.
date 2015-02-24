@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Main {
 	public static String [] cardNum = {"2","3","4","5","6","7","8","9","10","J","Q","K","A"};
-	public static String [] cardSuit = {"diamond","club","heart","spade"};
+	public static String [] cardSuit = {"D","C","H","S"};
 	public static int numOfCase = 1;
 	
 	public static void main(String args[] ){

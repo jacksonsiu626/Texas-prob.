@@ -1,7 +1,7 @@
 
 public class Card {
 	public static String [] cardNumVar = {"2","3","4","5","6","7","8","9","10","J","Q","K","A"};
-	public static String [] cardSuitVar = {"diamond","club","heart","spade"};
+	public static String [] cardSuitVar = {"♦","♣","♥","♠"};
 	public static int [][] cardUsed = new int[52][4];
 	
 	private int cardNum;
@@ -19,13 +19,10 @@ public class Card {
 		cardUsed[cardNum][cardSuit] = 1;
 	}
 	
-	public Card(String cardNum, String cardSuit) {
-		int i,j;
-		for(i=0 ; cardNum != cardNumVar[i] ; i++);
-		for(j=0 ; cardSuit != cardSuitVar[j] ; j++);
-		this.cardNum = i;
-		this.cardSuit = j;
-		cardUsed[i][j] = 1;
+	public Card(int cardNum, int cardSuit) {
+		this.cardNum = cardNum;
+		this.cardSuit = cardSuit;
+		cardUsed[cardNum][cardSuit] = 1;
 	}
 
 	public static int[][] getCardUsed() {
