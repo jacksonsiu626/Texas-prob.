@@ -7,11 +7,11 @@ public class Dealer {
 	private static int [] playCards;
 	public static boolean playerWin;
 	
-	public Dealer(int numOfPlayer){
+	public Dealer(int numOfPlayer, int [] playerCardNum, int [] playerCardSuit){
 		playerWin=true;
 		this.numOfPlayer = numOfPlayer;
 		cardArr = new Card[numOfPlayer+1][2];
-		dealCard();
+		dealCard(playerCardNum, playerCardSuit);
 		playCards = checkCardType(cardArr[0]);
 		for(int i=1; i<numOfPlayer+1; i++){
 			int [] temp = checkCardType(cardArr[i]);
@@ -63,11 +63,23 @@ public class Dealer {
 			}
 		}
 	}
-	
 	public void dealCard(){
 		communityCards = new Card [5];
 		cardArr[0][0] = new Card(12,2);
 		cardArr[0][1] = new Card(11,2);
+		for(int i=1 ; i<numOfPlayer+1 ; i++){
+			cardArr[i][0] = new Card();
+			cardArr[i][1] = new Card();
+		}
+		for(int i=0 ; i<5 ; i++){
+			communityCards[i] = new Card();
+		}
+		//cardTranslate();
+	}
+	public void dealCard(int [] playerCardNum, int [] playerCardSuit){
+		communityCards = new Card [5];
+		cardArr[0][0] = new Card(playerCardNum[0],playerCardSuit[0]);
+		cardArr[0][1] = new Card(playerCardNum[1],playerCardSuit[1]);
 		for(int i=1 ; i<numOfPlayer+1 ; i++){
 			cardArr[i][0] = new Card();
 			cardArr[i][1] = new Card();

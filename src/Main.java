@@ -22,12 +22,17 @@ public class Main {
 
 		 //long begintime = System.currentTimeMillis();
 		int sum=0;
-		for(int i)
+		for(int i=0 ; i<Card.cardNumVar.length ; i++){
+			for(int j=i ; j<Card.cardNumVar.length ; j++){
+				System.out.println(Card.cardNumVar[i]+" - "+Card.cardNumVar[j]);
+			}
+		}
+		/*
 		for(int i=0 ; i<numOfCase ; i++){
 			Dealer dealer = new Dealer(numOfPlayer);
 			if(Dealer.playerWin)
 				sum++;
-		}
+		}*/
 
 		System.out.printf("Tested P()= %.6f\n",(double)sum/numOfCase);
 		
