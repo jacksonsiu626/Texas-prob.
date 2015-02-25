@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Main {
 	public static String [] cardNum = {"2","3","4","5","6","7","8","9","10","J","Q","K","A"};
 	public static String [] cardSuit = {"D","C","H","S"};
-	public static int numOfCase = 100000;
+	public static int numOfCase = 10000;
 	
 	public static void main(String args[] ){
 		//YourCard yourCard = new YourCard("A","spade","K","spade");
@@ -22,6 +22,7 @@ public class Main {
 
 		 //long begintime = System.currentTimeMillis();
 		int sum=0;
+		for(int i)
 		for(int i=0 ; i<numOfCase ; i++){
 			Dealer dealer = new Dealer(numOfPlayer);
 			if(Dealer.playerWin)
