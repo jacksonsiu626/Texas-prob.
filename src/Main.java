@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Main {
 	public static String [] cardNum = {"2","3","4","5","6","7","8","9","10","J","Q","K","A"};
 	public static String [] cardSuit = {"D","C","H","S"};
-	public static int numOfCase = 500000;
+	public static int numOfCase = 1;
 	
 	public static void main(String args[] ){
 		//YourCard yourCard = new YourCard("A","spade","K","spade");
@@ -14,7 +14,7 @@ public class Main {
 		String str;
 		int numOfPlayer=0;
 		
-		while(numOfPlayer<=0 || numOfPlayer>=9 ){
+		while(numOfPlayer<=0 || numOfPlayer>=1000 ){
 			System.out.println("Num Of player(not include yourself): ");
 			str = read.nextLine();
 			numOfPlayer = Integer.parseInt(str);
@@ -31,24 +31,26 @@ public class Main {
 		
 		int [] sameSuit={0,0};
 		int [] diffSuit={1,3};
-		for(int k=0 ; k<13 ; k++){
-			for(int j=k ; j<13 ; j++){
+		for(int k=0 ; k<1 ; k++){
+			for(int j=k ; j<1 ; j++){
 				int [] num={k,j};
-				for(int i=0 ; i<numOfCase ; i++){
-					Dealer dealer = new Dealer(numOfPlayer,num,sameSuit);
-					if(Dealer.playerWin)
-						sum++;
+				if(k != j){
+					for(int i=0 ; i<numOfCase ; i++){
+						Dealer dealer = new Dealer(numOfPlayer,num,sameSuit);
+						if(Dealer.playerWin)
+							sum++;
+					}
 				}
-				System.out.print(Card.cardNumVar[num[0]]+"-"+Card.cardSuitVar[sameSuit[0]]+" / "+Card.cardNumVar[num[1]]+"-"+Card.cardSuitVar[sameSuit[1]]);
-				System.out.printf("  P(same suit)= %.2f percent\n",(double)sum*100/numOfCase);
+				System.out.print(Card.cardNumVar[num[0]]+","+Card.cardSuitVar[sameSuit[0]]+","+Card.cardNumVar[num[1]]+","+Card.cardSuitVar[sameSuit[1]]);
+				System.out.printf(",%.2f percent\n",(double)sum*100/numOfCase);
 				sum=0;
 				for(int i=0 ; i<numOfCase ; i++){
 					Dealer dealer = new Dealer(numOfPlayer,num,diffSuit);
 					if(Dealer.playerWin)
 						sum++;
 				}
-				System.out.print(Card.cardNumVar[num[0]]+"-"+Card.cardSuitVar[diffSuit[0]]+" / "+Card.cardNumVar[num[1]]+"-"+Card.cardSuitVar[diffSuit[1]]);
-				System.out.printf("  P(diff. suit)= %.2f percent\n",(double)sum*100/numOfCase);
+				System.out.print(Card.cardNumVar[num[0]]+","+Card.cardSuitVar[diffSuit[0]]+","+Card.cardNumVar[num[1]]+","+Card.cardSuitVar[diffSuit[1]]);
+				System.out.printf(",%.2f percent\n",(double)sum*100/numOfCase);
 				sum=0;
 			}
 		}

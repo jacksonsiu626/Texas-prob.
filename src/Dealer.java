@@ -62,28 +62,17 @@ public class Dealer {
 				}
 			}
 		}
+		Card.setCardArr(null); 
 	}
-	public void dealCard(){
-		communityCards = new Card [5];
-		cardArr[0][0] = new Card(12,2);
-		cardArr[0][1] = new Card(11,2);
-		for(int i=1 ; i<numOfPlayer+1 ; i++){
-			cardArr[i][0] = new Card();
-			cardArr[i][1] = new Card();
-		}
-		for(int i=0 ; i<5 ; i++){
-			communityCards[i] = new Card();
-		}
-		//cardTranslate();
-	}
+
 	public void dealCard(int [] playerCardNum, int [] playerCardSuit){
-		communityCards = new Card [5];
 		cardArr[0][0] = new Card(playerCardNum[0],playerCardSuit[0]);
 		cardArr[0][1] = new Card(playerCardNum[1],playerCardSuit[1]);
 		for(int i=1 ; i<numOfPlayer+1 ; i++){
 			cardArr[i][0] = new Card();
 			cardArr[i][1] = new Card();
 		}
+		communityCards = new Card [5];
 		for(int i=0 ; i<5 ; i++){
 			communityCards[i] = new Card();
 		}
@@ -92,12 +81,12 @@ public class Dealer {
 
 	public void cardTranslate(){
 		for(int i=0 ; i<5 ; i++){
-			System.out.println(Card.cardNumVar[communityCards[i].getCardNum()]+" - "+Card.cardSuitVar[communityCards[i].getCardSuit()]);
+			System.out.println(Card.cardNumVar[communityCards[i].getCardNum()]+","+communityCards[i].getCardSuit());
 		}
 			System.out.println("============");
 		for(int i=0 ; i<numOfPlayer+1 ; i++){
-			System.out.print(Card.cardNumVar[cardArr[i][0].getCardNum()]+" - "+Card.cardSuitVar[cardArr[i][0].getCardSuit()]+" / ") ;
-			System.out.println(Card.cardNumVar[cardArr[i][1].getCardNum()]+" - "+Card.cardSuitVar[cardArr[i][1].getCardSuit()]) ;
+			System.out.print(Card.cardNumVar[cardArr[i][0].getCardNum()]+","+cardArr[i][0].getCardSuit()+" / ") ;
+			System.out.println(Card.cardNumVar[cardArr[i][1].getCardNum()]+","+cardArr[i][1].getCardSuit()) ;
 		}
 		System.out.println("===== After sorting ======");
 	}
@@ -110,8 +99,8 @@ public class Dealer {
 			cardComb[i] = communityCards[i-2];
 		}
 		playerCards = Sort.sort(cardComb);
-		//	for(int j=0 ; j<playerCards.length ; j++)
-		//		System.out.print(Card.cardNumVar[playerCards[j].getCardNum()]+"-"+Card.cardSuitVar[playerCards[j].getCardSuit()]+" / ") ;
+			//for(int j=0 ; j<playerCards.length ; j++)
+			//	System.out.print(Card.cardNumVar[playerCards[j].getCardNum()]+","+playerCards[j].getCardSuit()+",") ;
 		
 		int [] check;
 		if( (check=checkStraightFlush(cardComb)) != null){
