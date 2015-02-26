@@ -2,37 +2,56 @@
 public class Card {
 	public static String [] cardNumVar = {"2","3","4","5","6","7","8","9","10","J","Q","K","A"};
 	public static String [] cardSuitVar = {"d","c","h","s"};
-	public static int [][] cardUsed;
+	public static int [][] cardArr = null;
+	public static int index = cardArr.length-1;
 	
 	private int cardNum;
 	private int cardSuit;
 	
 	public Card() {
-		cardUsed= new int[52][4];
-		int cardNum;
-		int cardSuit;
-		do{
-			cardNum = (int)Math.floor(Math.random()*13);
-			cardSuit = (int)Math.floor(Math.random()*4);
-		}while(cardUsed[cardNum][cardSuit] == 1);
-		this.cardNum = cardNum;
-		this.cardSuit = cardSuit;
-		cardUsed[cardNum][cardSuit] = 1;
+		if(cardArr == null){
+			cardArr = new int [52][2];
+			int count =0;
+			for(int i=0 ; i<13 ; i++){
+				for(int j=0 ; j<4 ; j++){
+					cardArr[count][0]=i;
+					cardArr[count++][1]=j;
+				}
+			}
+		}
+		
+		int rand = (int)Math.floor(Math.random()*index);
+		this.cardNum = cardArr[rand][0];
+		this.cardSuit = cardArr[rand][1];
+		cardArr[rand] = cardArr[index];
+		cardArr[index][0] = this.cardNum;
+		cardArr[index][1] = this.cardSuit;
+		index--;
+		
 	}
 	
 	public Card(int cardNum, int cardSuit) {
-		cardUsed= new int[52][4];
+		if(cardArr == null){
+			cardArr = new int [52][2];
+			int count =0;
+			for(int i=0 ; i<13 ; i++){
+				for(int j=0 ; j<4 ; j++){
+					cardArr[count][0]=i;
+					cardArr[count++][1]=j;
+				}
+			}
+		}
 		this.cardNum = cardNum;
 		this.cardSuit = cardSuit;
-		cardUsed[cardNum][cardSuit] = 1;
+		cardArr[cardNum][cardSuit] = 1;
 	}
 
-	public static int[][] getCardUsed() {
-		return cardUsed;
+	public static int[][] getcardArr() {
+		return cardArr;
 	}
 
-	public static void setCardUsed(int[][] cardUsed) {
-		Card.cardUsed = cardUsed;
+	public static void setcardArr(int[][] cardArr) {
+		Card.cardArr = cardArr;
 	}
 
 	public int getCardNum() {
